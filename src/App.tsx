@@ -1,12 +1,12 @@
 import React from 'react';
 import './App.css';
 import Buttons from './components/Buttons';
+import Todolist from './components/Todolist';
 
 function App() {
   return (
     <div className="App">
-      <h1>Hello again</h1>
-      <Buttons/>
+      <Todolist/>
     </div>
   );
 }
