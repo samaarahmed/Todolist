@@ -1,32 +1,36 @@
 import { Button, Card, Input } from "@mui/material"
 import { useState } from "react"
 
+const todoarr = [{id:1, title:"Plugga"},{id:2, title:"spela"}];
 
 function Todolist(){
-    const todoarr = [""]
     const [todos,setTodo] = useState(todoarr)
-    const [text,setText] = useState('')
+    const [text,setText] = useState({id:3,title:""})
 
     const  AddtoDo = ()=>{
 
 
-
         setTodo([...todos,text])
+        console.log(todoarr)
 
 
     }
     
+    const todolist = todos.map((todo)=>(
+
+        <Display key={todo.id} id = {todo.id} title={todo.title}></Display>
+
+        ));
+
     return(
         <div className="container">
-        <Card style={{backgroundColor: "lightgray"}}>
         <h2>Lägg till saker i listan!</h2>
         <div>
-        <input  value={text} onChange={event=>(setText(event.target.value))}/> 
+        <input  value={text.title} onChange={event=>setText({...text,title: event.target.value})} placeholder="Att göra:"/> 
         </div>
         <Button variant="contained" onClick={AddtoDo}>Add new to do</Button>
-        <Display todos={todos}></Display>
-        </Card>
-
+        {todolist}
+        
         </div>
 
     )
@@ -34,13 +38,16 @@ function Todolist(){
 export default Todolist
 
 interface Itodo {
-    todos : string[]
+    id : number;
+    title: string;
 }
 
-function Display ({todos}:Itodo){
+function Display ({id,title}:Itodo){
     return(<>
-        {todos.map(todo=><li>{todo}</li>)}
- </>
+        <li>
+            id:{id}  title : {title}
+        </li>
+</>
     )
 
 }
