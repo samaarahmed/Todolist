@@ -1,10 +1,17 @@
-import { Button, Card, IconButton, Input, ListItem, ListItemText } from "@mui/material"
+import { Button,IconButton} from "@mui/material"
 import { useState } from "react"
 import DeleteIcon from '@mui/icons-material/Delete';
-import { List } from "@mui/icons-material";
-import { style } from "@mui/system";
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import Grid from '@mui/material/Grid';
 
-const todoarr = [{id:1, title:"Plugga",status:false},{id:2, title:"spela",status:false}];
+
+
+
+const todoarr = [{id:1, title:"Plugga",status:false},{id:2, title:"Spela",status:false}];
+
+  
 
 function Todolist(){
     const [todos,setTodo] = useState(todoarr)
@@ -42,25 +49,30 @@ function Todolist(){
         <div>
         <input  value={text.title} onChange={event=>setText({...text,title: event.target.value})} placeholder="Att göra:"/> 
         </div>
+        <div className="button-container">
         <Button variant="contained" fullWidth onClick={AddtoDo}>Add new to do</Button>
-        <div className="container">
+        </div>
+        <Grid container spacing={1}>
 
-      <table className="table table-striped">
-      <tbody>
-      {todos.map((todo)=>(
-          <tr key={todo.id}>
-            <td className={todo.status == true? "addline" : "withoutline"} key={todo.id} onClick = {()=>overline(todo.id)}>{todo.title} <button aria-label="delete" onClick={()=>deleteTodo(todo.id)}>
-  <DeleteIcon />
-</button>
-</td>
-          </tr>
-                  ))}
+        <Grid item xs={12} md={8} >
 
-      </tbody>
+        <List>
+    {todos.map((todo)=>(
+      <ListItem
+        key={todo.id} >
+        <ListItemText className={todo.status == true? "addline" : "withoutline"} key={todo.id} onClick = {()=>overline(todo.id)}
+          primary={todo.title} style={{backgroundColor: "white",padding:5,borderRadius:2}}
 
-      </table>
-    </div>
 
+        />
+          <IconButton edge="end" aria-label="delete" onClick={()=>deleteTodo(todo.id)}  >
+            <DeleteIcon />
+          </IconButton>      
+      </ListItem>
+    ))}
+  </List>
+        </Grid>
+        </Grid>
         
         </div>
 
@@ -73,25 +85,6 @@ function Todolist(){
         console.log(updatedtods)
 
     }
-    /*
-    <List dense={dense}>
-    {generate(
-      <ListItem
-        secondaryAction={
-          <IconButton edge="end" aria-label="delete">
-            <DeleteIcon />
-          </IconButton>
-        }
-      >
-        <ListItemText
-          primary="Single-line item"
-          secondary={secondary ? 'Secondary text' : null}
-        />
-      </ListItem>,
-    )}
-  </List>
-*/
-
 
 }
 export default Todolist
