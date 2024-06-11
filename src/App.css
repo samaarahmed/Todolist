@@ -18,7 +18,6 @@ input {
   border-radius: 2px;
   display: inline-block;
   box-sizing: border-box;
-  opacity: 15%;
 }
 .button-container{
   width: 90%;
