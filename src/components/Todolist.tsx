@@ -46,35 +46,40 @@ function Todolist(){
     return(
         <div className="container">
         <h1>My Todo list </h1>
-        <div>
-        <input  value={text.title} onChange={event=>setText({...text,title: event.target.value})} placeholder="Att göra:"/> 
-        </div>
-        <div className="button-container">
-        <Button variant="contained" fullWidth onClick={AddtoDo}>Add new to do</Button>
-        </div>
-        <Grid container spacing={1}>
-
-        <Grid item xs={12} md={8} >
-
-        <List>
-    {todos.map((todo)=>(
-      <ListItem
-        key={todo.id} >
-        <ListItemText className={todo.status === true? "addline" : "withoutline"} key={todo.id} onClick = {()=>overline(todo.id)}
-          primary={todo.title} style={{backgroundColor: "white",padding:5,borderRadius:2}}
-
-
-        />
-          <IconButton edge="end" aria-label="delete" onClick={()=>deleteTodo(todo.id)}  >
-            <DeleteIcon />
-          </IconButton>      
-      </ListItem>
-    ))}
-  </List>
-        </Grid>
-        </Grid>
-        
-        </div>
+  <div className="input-container">
+    <input
+      value={text.title}
+      onChange={(event) => setText({ ...text, title: event.target.value })}
+      placeholder="To do:"
+      className="input-field"
+    />
+  </div>
+  <div className="button-container">
+    <Button variant="contained" onClick={AddtoDo} className="add-button">
+      Add new to do
+    </Button>
+  </div>
+  <Grid container justifyContent="center"  spacing={1}>
+    <Grid item  xs={10} md={8}>
+      <List>
+        {todos.map((todo) => (
+          <ListItem key={todo.id}>
+            <ListItemText
+              className={todo.status === true ? "addline" : "withoutline"}
+              key={todo.id}
+              onClick={() => overline(todo.id)}
+              primary={todo.title}
+              style={{ backgroundColor: "white", padding: 5, borderRadius: 5 }}
+            />
+            <IconButton edge="end" aria-label="delete" onClick={() => deleteTodo(todo.id)}>
+              <DeleteIcon />
+            </IconButton>
+          </ListItem>
+        ))}
+      </List>
+    </Grid>
+  </Grid>
+</div>
 
     )
 
