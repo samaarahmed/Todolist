@@ -45,7 +45,7 @@ function Todolist(){
 
     return(
         <div className="container">
-        <h2>Lägg till saker i listan!</h2>
+        <h1>My Todo list </h1>
         <div>
         <input  value={text.title} onChange={event=>setText({...text,title: event.target.value})} placeholder="Att göra:"/> 
         </div>
