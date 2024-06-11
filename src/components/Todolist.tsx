@@ -28,7 +28,7 @@ function Todolist(){
     function overline (id:number){
 
         const updatedlinethrough = todos.map((mytodo)=>{
-            if(id==mytodo.id){
+            if(id===mytodo.id){
                 return{...mytodo,status:!mytodo.status}
             } return mytodo
         });
@@ -60,7 +60,7 @@ function Todolist(){
     {todos.map((todo)=>(
       <ListItem
         key={todo.id} >
-        <ListItemText className={todo.status == true? "addline" : "withoutline"} key={todo.id} onClick = {()=>overline(todo.id)}
+        <ListItemText className={todo.status === true? "addline" : "withoutline"} key={todo.id} onClick = {()=>overline(todo.id)}
           primary={todo.title} style={{backgroundColor: "white",padding:5,borderRadius:2}}
 
 
@@ -80,7 +80,7 @@ function Todolist(){
 
     function deleteTodo(id: number){
 
-        const updatedtods = todos.filter(item => item.id != id)
+        const updatedtods = todos.filter(item => item.id !== id)
         setTodo(updatedtods)
         console.log(updatedtods)
 
