@@ -9,19 +9,25 @@ import Grid from '@mui/material/Grid';
 
 
 
-const todoarr = [{id:1, title:"Plugga",status:false},{id:2, title:"Spela",status:false}];
+const todoarr = [{id:1, title:"Work with new ReactNative app",date:"2024-06-12",time:"12:20",status:false},{id:2, title:"Meeting with product owner",date:"2024-06-11",time:"12:20",status:false}];
 
   
 
 function Todolist(){
     const [todos,setTodo] = useState(todoarr)
-    const [text,setText] = useState({id:3,title:"",status:false})
+    const [text,setText] = useState({id:3, title:"", date:"", time:"", status:false})
 
+    const getTodayDate = () => {
+      const today = new Date();
+      const year = today.getFullYear();
+      const month = String(today.getMonth() + 1).padStart(2, '0');
+      const day = String(today.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    };
+    
     const  AddtoDo = ()=>{
-
         setTodo([...todos,text])
         console.log(todos)
-
 
     }
     
@@ -53,14 +59,28 @@ function Todolist(){
       placeholder="To do:"
       className="input-field"
     />
+        <input
+      type="date"
+      value={text.date}
+      onChange={(event) => setText({ ...text, date: event.target.value })}
+      className="input-field"
+      min={getTodayDate()}
+    />
+    <input
+      type="time"
+      value={text.time}
+      onChange={(event) => setText({ ...text, time: event.target.value })}
+      className="input-field"
+    />
+
   </div>
   <div className="button-container">
     <Button variant="contained" onClick={AddtoDo} className="add-button">
       Add new to do
     </Button>
   </div>
-  <Grid container justifyContent="center"  spacing={1}>
-    <Grid item  xs={10} md={8}>
+  <Grid container justifyContent="center" spacing={1}>
+    <Grid item xs={12} md={8}>
       <List>
         {todos.map((todo) => (
           <ListItem key={todo.id}>
@@ -68,8 +88,8 @@ function Todolist(){
               className={todo.status === true ? "addline" : "withoutline"}
               key={todo.id}
               onClick={() => overline(todo.id)}
-              primary={todo.title}
-              style={{ backgroundColor: "white", padding: 5, borderRadius: 5 }}
+              primary={`${todo.title} - ${todo.date} - ${todo.time}`}
+              style={{ backgroundColor: "white", padding: 5, borderRadius: 2, fontWeight: 'bold' }}
             />
             <IconButton edge="end" aria-label="delete" onClick={() => deleteTodo(todo.id)}>
               <DeleteIcon />
