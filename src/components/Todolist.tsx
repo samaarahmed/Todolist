@@ -56,7 +56,7 @@ function Todolist(){
     <input
       value={text.title}
       onChange={(event) => setText({ ...text, title: event.target.value })}
-      placeholder="To do:"
+      placeholder="Add to do:"
       className="input-field"
     />
         <input
